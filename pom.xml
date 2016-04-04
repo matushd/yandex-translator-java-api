@@ -4,16 +4,57 @@
   <groupId>com.rmtheis.yandtran</groupId>
   <artifactId>yandex-translator-java-api</artifactId>
   <packaging>jar</packaging>
-  <version>v1.0.0</version>
+  <version>v1.0.1</version>
   <name>yandex-translator-java-api</name>
   <url>http://maven.apache.org</url>
+  <properties>
+	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
 	<dependency>
-		<groupId>org.json.simple</groupId>
+		<groupId>corg.json.simple</groupId>
 		<artifactId>json-simple</artifactId>
 		<version>1.1</version>
-		<scope>system</scope>
-		<systemPath>${project.basedir}/src/main/resources/json_simple-1.1.jar</systemPath>
 	</dependency>
   </dependencies>
+  <build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-source-plugin</artifactId>
+			<version>3.0.0</version>
+			<executions>
+				<execution>
+					<id>attach-sources</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-install-plugin</artifactId>
+			<version>2.5.2</version>
+			<executions>
+				<execution>
+					<id>install-external</id>
+					<phase>clean</phase>
+					<configuration>
+						<file>${basedir}/lib/json_simple-1.1.jar</file>
+						<repositoryLayout>default</repositoryLayout>
+						<groupId>corg.json.simple</groupId>
+						<artifactId>json-simple</artifactId>
+						<version>1.1</version>
+						<packaging>jar</packaging>
+						<generatePom>true</generatePom>
+					</configuration>
+					<goals>
+						<goal>install-file</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+  </build>
 </project>
