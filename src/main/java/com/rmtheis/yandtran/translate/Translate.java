@@ -18,7 +18,6 @@ package com.rmtheis.yandtran.translate;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import com.rmtheis.yandtran.ApiKeys;
 import com.rmtheis.yandtran.YandexTranslatorAPI;
 import com.rmtheis.yandtran.language.Language;
 
@@ -28,10 +27,8 @@ import com.rmtheis.yandtran.language.Language;
 public final class Translate extends YandexTranslatorAPI {
 
   private static final String SERVICE_URL = "https://translate.yandex.net/api/v1.5/tr.json/translate?";
+  
   private static final String TRANSLATION_LABEL = "text";
-
-  //prevent instantiation
-  private Translate(){};
 
   /**
    * Translates text from a given Language to another given Language using Yandex.
@@ -60,14 +57,4 @@ public final class Translate extends YandexTranslatorAPI {
     validateServiceState();
   }
   
-  public static void main(String[] args) {
-    try {
-      Translate.setKey(ApiKeys.YANDEX_API_KEY);
-      String translation = Translate.execute("The quick brown fox jumps over the lazy dog.", Language.ENGLISH, Language.SPANISH);
-      System.out.println("Translation: " + translation);
-    } catch (Exception e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
 }

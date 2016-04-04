@@ -18,7 +18,6 @@ package com.rmtheis.yandtran.detect;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import com.rmtheis.yandtran.ApiKeys;
 import com.rmtheis.yandtran.YandexTranslatorAPI;
 import com.rmtheis.yandtran.language.Language;
 import com.rmtheis.yandtran.translate.Translate;
@@ -27,11 +26,10 @@ import com.rmtheis.yandtran.translate.Translate;
  * Provides an interface to the Yandex Translator Detect service method
  */
 public final class Detect extends YandexTranslatorAPI {
+	
     private static final String SERVICE_URL = "https://translate.yandex.net/api/v1.5/tr.json/detect?";
-    private static final String DETECTION_LABEL = "lang";
     
-    // prevent instantiation
-    private Detect(){};
+    private static final String DETECTION_LABEL = "lang";
 
     /**
 	  * Detects the language of a supplied String.
@@ -55,17 +53,6 @@ public final class Detect extends YandexTranslatorAPI {
             throw new RuntimeException("TEXT_TOO_LARGE - Yandex Translator (Detect) can handle up to 10,240 bytes per request");
         }
         validateServiceState();
-    }
-    
-    public static void main(String[] args) {
-      try {
-        Translate.setKey(ApiKeys.YANDEX_API_KEY);
-        Language translation = Detect.execute("The quick brown fox jumps over the lazy dog.");
-        System.out.println("Detected: " + translation.toString());
-      } catch (Exception e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
     }
 
 }
