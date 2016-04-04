@@ -17,7 +17,8 @@ package com.rmtheis.yandtran.translate;
 
 import java.net.URL;
 import java.net.URLEncoder;
-
+import java.util.ArrayList;
+import java.util.Scanner;
 import com.rmtheis.yandtran.YandexTranslatorAPI;
 import com.rmtheis.yandtran.language.Language;
 
@@ -52,6 +53,23 @@ public final class Translate extends YandexTranslatorAPI {
     final URL url = new URL(SERVICE_URL + params);
     return retrievePropArrString(url, TRANSLATION_LABEL).trim();
   }
+  
+	/**
+	 * Multiline text translate
+	 * @param data
+	 * @return
+	 * @throws Exception
+	 */
+	public String translate(String data) throws Exception {
+		Scanner scanner = new Scanner(data);
+		ArrayList<String> result = new ArrayList<String>();
+		while (scanner.hasNextLine()) {
+		  String line = scanner.nextLine();
+		  result.add(execute(line, Language.ENGLISH, Language.POLISH));
+		}
+		scanner.close();
+		return String.join(System.lineSeparator(), result);
+	}
 
   /**
    * Validate service state
