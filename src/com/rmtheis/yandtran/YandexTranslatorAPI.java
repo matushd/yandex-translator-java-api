@@ -34,18 +34,22 @@ public abstract class YandexTranslatorAPI {
   //Encoding type
   protected static final String ENCODING = "UTF-8";
 
-  protected static String apiKey;
-  private static String referrer;
+  protected String apiKey;
+  private String referrer;
 
   protected static final String PARAM_API_KEY = "key=",
       PARAM_LANG_PAIR = "&lang=",
       PARAM_TEXT = "&text=";
+  
+  public YandexTranslatorAPI(final String pKey) {
+	  setKey(pKey);
+  }
 
   /**
    * Sets the API key.
    * @param pKey The API key.
    */
-  public static void setKey(final String pKey) {
+  public void setKey(final String pKey) {
     apiKey = pKey;
   }
 
@@ -53,7 +57,7 @@ public abstract class YandexTranslatorAPI {
    * Sets the referrer field.
    * @param pKey The referrer.
    */
-  public static void setReferrer(final String pReferrer) {
+  public void setReferrer(final String pReferrer) {
     referrer = pReferrer;
   }
 
@@ -64,7 +68,7 @@ public abstract class YandexTranslatorAPI {
    * @return The translated String.
    * @throws Exception on error.
    */
-  private static String retrieveResponse(final URL url) throws Exception {
+  private String retrieveResponse(final URL url) throws Exception {
     final HttpsURLConnection uc = (HttpsURLConnection) url.openConnection();
     if(referrer!=null)
       uc.setRequestProperty("referer", referrer);
@@ -90,7 +94,7 @@ public abstract class YandexTranslatorAPI {
    * Forms a request, sends it using the GET method and returns the value with the given label from the
    * resulting JSON response.
    */
-  protected static String retrievePropString(final URL url, final String jsonValProperty) throws Exception {
+  protected String retrievePropString(final URL url, final String jsonValProperty) throws Exception {
     final String response = retrieveResponse(url);
     JSONObject jsonObj = (JSONObject)JSONValue.parse(response);
     return jsonObj.get(jsonValProperty).toString();
@@ -100,7 +104,7 @@ public abstract class YandexTranslatorAPI {
    * Forms a request, sends it using the GET method and returns the contents of the array of strings
    * with the given label, with multiple strings concatenated.
    */
-  protected static String retrievePropArrString(final URL url, final String jsonValProperty) throws Exception {
+  protected String retrievePropArrString(final URL url, final String jsonValProperty) throws Exception {
       final String response = retrieveResponse(url);
       String[] translationArr = jsonObjValToStringArr(response, jsonValProperty);
       String combinedTranslations = "";
@@ -111,7 +115,7 @@ public abstract class YandexTranslatorAPI {
   }
 
   // Helper method to parse a JSONObject containing an array of Strings with the given label.
-  private static String[] jsonObjValToStringArr(final String inputString, final String subObjPropertyName) throws Exception {
+  private String[] jsonObjValToStringArr(final String inputString, final String subObjPropertyName) throws Exception {
     JSONObject jsonObj = (JSONObject)JSONValue.parse(inputString);
     JSONArray jsonArr = (JSONArray) jsonObj.get(subObjPropertyName);
     return jsonArrToStringArr(jsonArr.toJSONString(), null);
@@ -119,7 +123,7 @@ public abstract class YandexTranslatorAPI {
 
   // Helper method to parse a JSONArray. Reads an array of JSONObjects and returns a String Array
   // containing the toString() of the desired property. If propertyName is null, just return the String value.
-  private static String[] jsonArrToStringArr(final String inputString, final String propertyName) throws Exception {
+  private String[] jsonArrToStringArr(final String inputString, final String propertyName) throws Exception {
     final JSONArray jsonArr = (JSONArray)JSONValue.parse(inputString);
     String[] values = new String[jsonArr.size()];
 
@@ -145,7 +149,7 @@ public abstract class YandexTranslatorAPI {
    * @return The contents of the InputStream as a String.
    * @throws Exception on error.
    */
-  private static String inputStreamToString(final InputStream inputStream) throws Exception {
+  private String inputStreamToString(final InputStream inputStream) throws Exception {
     final StringBuilder outputBuilder = new StringBuilder();
 
     try {
@@ -166,7 +170,7 @@ public abstract class YandexTranslatorAPI {
   }
 
   //Check if ready to make request, if not, throw a RuntimeException
-  protected static void validateServiceState() throws Exception {
+  protected void validateServiceState() throws Exception {
     if(apiKey==null||apiKey.length()<27) {
       throw new RuntimeException("INVALID_API_KEY - Please set the API Key with your Yandex API Key");
     }

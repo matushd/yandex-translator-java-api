@@ -29,6 +29,10 @@ public final class Translate extends YandexTranslatorAPI {
   private static final String SERVICE_URL = "https://translate.yandex.net/api/v1.5/tr.json/translate?";
   
   private static final String TRANSLATION_LABEL = "text";
+  
+  public Translate(final String pKey) {
+	  super(pKey);
+  }
 
   /**
    * Translates text from a given Language to another given Language using Yandex.
@@ -49,7 +53,12 @@ public final class Translate extends YandexTranslatorAPI {
     return retrievePropArrString(url, TRANSLATION_LABEL).trim();
   }
 
-  private static void validateServiceState(final String text) throws Exception {
+  /**
+   * Validate service state
+   * @param text
+   * @throws RuntimeException
+   */
+  private void validateServiceState(final String text) throws Exception {
     final int byteLength = text.getBytes(ENCODING).length;
     if(byteLength>10240) { // TODO What is the maximum text length allowable for Yandex?
       throw new RuntimeException("TEXT_TOO_LARGE");

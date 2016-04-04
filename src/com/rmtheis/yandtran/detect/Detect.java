@@ -17,10 +17,8 @@ package com.rmtheis.yandtran.detect;
 
 import java.net.URL;
 import java.net.URLEncoder;
-
 import com.rmtheis.yandtran.YandexTranslatorAPI;
 import com.rmtheis.yandtran.language.Language;
-import com.rmtheis.yandtran.translate.Translate;
 
 /**
  * Provides an interface to the Yandex Translator Detect service method
@@ -30,6 +28,10 @@ public final class Detect extends YandexTranslatorAPI {
     private static final String SERVICE_URL = "https://translate.yandex.net/api/v1.5/tr.json/detect?";
     
     private static final String DETECTION_LABEL = "lang";
+    
+    public Detect(final String pKey) {
+    	super(pKey);
+    }
 
     /**
 	  * Detects the language of a supplied String.
@@ -47,7 +49,7 @@ public final class Detect extends YandexTranslatorAPI {
       return Language.fromString(retrievePropString(url, DETECTION_LABEL));
 	  }
         
-    private static void validateServiceState(final String text) throws Exception {
+    private void validateServiceState(final String text) throws Exception {
     	final int byteLength = text.getBytes(ENCODING).length;
         if(byteLength>10240) { // TODO What is the maximum text length allowable for Yandex?
             throw new RuntimeException("TEXT_TOO_LARGE - Yandex Translator (Detect) can handle up to 10,240 bytes per request");
