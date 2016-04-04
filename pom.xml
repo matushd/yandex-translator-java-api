@@ -4,7 +4,7 @@
   <groupId>com.rmtheis.yandtran</groupId>
   <artifactId>yandex-translator-java-api</artifactId>
   <packaging>jar</packaging>
-  <version>v1.0.0-beta.4</version>
+  <version>v1.0.0</version>
   <name>yandex-translator-java-api</name>
   <url>http://maven.apache.org</url>
   <dependencies>
