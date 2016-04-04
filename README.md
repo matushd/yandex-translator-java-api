@@ -25,7 +25,7 @@ Quickstart
 	<dependency>
 		<groupId>com.github.matushd</groupId>
 		<artifactId>yandex-translator-java-api</artifactId>
-		<version>1.0.7</version>
+		<version>1.0.8</version>
 	</dependency>
 </dependencies>
 ```
