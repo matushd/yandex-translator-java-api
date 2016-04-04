@@ -4,7 +4,16 @@
   <groupId>com.rmtheis.yandtran</groupId>
   <artifactId>yandex-translator-java-api</artifactId>
   <packaging>jar</packaging>
-  <version>v1.0.0-beta.2</version>
+  <version>v1.0.0-beta.3</version>
   <name>yandex-translator-java-api</name>
   <url>http://maven.apache.org</url>
+  <dependencies>
+	<dependency>
+		<groupId>org.json.simple</groupId>
+		<artifactId>json-simple</artifactId>
+		<version>1.1</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/src/main/resources/json_simple-1.1.jar</systemPath>
+	</dependency>
+  </dependencies>
 </project>
