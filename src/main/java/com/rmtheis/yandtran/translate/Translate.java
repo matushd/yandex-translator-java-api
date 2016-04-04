@@ -39,7 +39,7 @@ public final class Translate extends YandexTranslatorAPI {
    * @return The translated String.
    * @throws Exception on error.
    */
-  public static String execute(final String text, final Language from, final Language to) throws Exception {
+  public String execute(final String text, final Language from, final Language to) throws Exception {
     validateServiceState(text); 
     final String params = 
         PARAM_API_KEY + URLEncoder.encode(apiKey,ENCODING) 
