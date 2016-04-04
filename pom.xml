@@ -4,7 +4,7 @@
   <groupId>com.rmtheis</groupId>
   <artifactId>yandex-translator-java-api</artifactId>
   <packaging>jar</packaging>
-  <version>master-SNAPSHOT</version>
+  <version>v1.0.0-beta</version>
   <name>yandex-translator-java-api</name>
   <url>http://maven.apache.org</url>
 </project>
