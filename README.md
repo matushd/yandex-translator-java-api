@@ -14,15 +14,31 @@ This project was adapted from the microsoft-translator-java-api project by Jonat
 Quickstart
 ==========
 
+```xml
+<repositories>
+	<repository>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+</repositories>
+<dependencies>
+	<dependency>
+		<groupId>com.github.matushd</groupId>
+		<artifactId>yandex-translator-java-api</artifactId>
+		<version>1.0.7</version>
+	</dependency>
+</dependencies>
+```
+
 ```java
 import com.rmtheis.yandtran.language.Language;
 import com.rmtheis.yandtran.translate.Translate;
 
 public class test {
     public static void main(String[] args) throws Exception {
-        Translate.setKey("[Put your API Key here]");
+        Translate translate = new Translate("[Put your API Key here]");
 
-        String translatedText = Translate.execute("Hola, mundo!", Language.SPANISH, Language.ENGLISH);
+        String translatedText = translate.execute("Hola, mundo!", Language.SPANISH, Language.ENGLISH);
 
         System.out.println(translatedText);
     }
