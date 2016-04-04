@@ -55,17 +55,17 @@ public final class Translate extends YandexTranslatorAPI {
   }
   
 	/**
-	 * Multiline text translate
+	 * Multiline text translate from a given Language to another given Language using Yandex.
 	 * @param data
 	 * @return
 	 * @throws Exception
 	 */
-	public String translate(String data) throws Exception {
+	public String translate(final String data, final Language from, final Language to) throws Exception {
 		Scanner scanner = new Scanner(data);
 		ArrayList<String> result = new ArrayList<String>();
 		while (scanner.hasNextLine()) {
 		  String line = scanner.nextLine();
-		  result.add(execute(line, Language.ENGLISH, Language.POLISH));
+		  result.add(execute(line, from, to));
 		}
 		scanner.close();
 		return String.join(System.lineSeparator(), result);
